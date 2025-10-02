@@ -20,11 +20,12 @@ Shopifyストアのページ最上部に、期間や表示回数を細かく設�
 - 複数パターン表示設定（優先度順、ローテーション、ランダム）
 - カウントダウンバナー
 
-### 課金・利用トラッキング機能
+### プラン管理・利用トラッキング機能
 - 表示回数のトラッキング
-- 従量課金対応（Shopify Usage Charge API）
-- 課金ティア構造
-- 無料枠超過時の制御
+- 定額プラン制対応（Shopify Recurring Application Charge API）
+- プラン管理機能（アップグレード・ダウングレード）
+- プラン制限超過時の制御
+- 利用状況表示
 
 ## 🛠 技術スタック
 
@@ -105,20 +106,23 @@ shopify-info-banner-app/
 │   ├── Shopifyバナーマネージャーアプリ 要件定義書.md
 │   ├── Shopifyバナーマネージャーアプリ 開発仕様書.md
 │   ├── Shopifyバナーマネージャーアプリ 開発手順書.md
-│   └── Shopifyバナーマネージャーアプリ 開発 Todoリスト.md
-├── src/                           # ソースコード
-│   ├── components/                # Reactコンポーネント
-│   ├── pages/                     # ページコンポーネント
-│   ├── hooks/                     # カスタムフック
-│   ├── utils/                     # ユーティリティ関数
-│   └── types/                     # TypeScript型定義
+│   ├── Shopifyバナーマネージャーアプリ 開発 Todoリスト.md
+│   ├── アカウント作成手順書.md
+│   ├── セキュリティ要件.md
+│   ├── 運用・監視要件.md
+│   └── 開発環境セットアップガイド.md
 ├── workers/                       # Cloudflare Workers
-│   ├── src/                       # Workersソースコード
 │   ├── schema.sql                 # D1データベーススキーマ
 │   └── wrangler.toml              # Wrangler設定
-├── public/                        # 静的ファイル
+├── .env.example                   # 環境変数テンプレート
+├── .eslintrc.cjs                  # ESLint設定
 ├── .gitignore                     # Git除外設定
-└── README.md                      # このファイル
+├── .prettierrc                    # Prettier設定
+├── package.json                   # プロジェクト設定
+├── README.md                      # このファイル
+├── tsconfig.json                  # TypeScript設定
+├── tsconfig.node.json             # TypeScript Node設定
+└── vite.config.ts                 # Vite設定
 ```
 
 ## 🗄 データベーススキーマ
@@ -172,10 +176,22 @@ wrangler deploy
 
 詳細な仕様や開発手順については、`docs/`ディレクトリ内のドキュメントを参照してください：
 
-- [要件定義書](docs/Shopifyバナーマネージャーアプリ%20要件定義書.md)
-- [開発仕様書](docs/Shopifyバナーマネージャーアプリ%20開発仕様書.md)
-- [開発手順書](docs/Shopifyバナーマネージャーアプリ%20開発手順書.md)
-- [開発Todoリスト](docs/Shopifyバナーマネージャーアプリ%20開発%20Todoリスト.md)
+### 📋 基本ドキュメント
+- [プロジェクト概要](docs/プロジェクト概要.md) - プロジェクト全体の概要
+- [要件定義書](docs/Shopifyバナーマネージャーアプリ%20要件定義書.md) - 機能要件・非機能要件
+- [開発仕様書](docs/Shopifyバナーマネージャーアプリ%20開発仕様書.md) - 技術仕様・データベース設計
+- [開発手順書](docs/Shopifyバナーマネージャーアプリ%20開発手順書.md) - 実装手順・開発フロー
+- [開発Todoリスト](docs/Shopifyバナーマネージャーアプリ%20開発%20Todoリスト.md) - 開発タスク一覧
+
+### 🛠 セットアップ・運用
+- [アカウント作成手順書](docs/アカウント作成手順書.md) - Shopify・Cloudflareアカウント作成
+- [開発環境セットアップガイド](docs/開発環境セットアップガイド.md) - ローカル開発環境構築
+- [セキュリティ要件](docs/セキュリティ要件.md) - セキュリティ仕様・対策
+- [運用・監視要件](docs/運用・監視要件.md) - 監視・ログ・バックアップ
+
+### 📝 プロジェクト管理
+- [CHANGELOG](docs/CHANGELOG.md) - 変更履歴
+- [CONTRIBUTING](docs/CONTRIBUTING.md) - コントリビューションガイド
 
 ## 🤝 コントリビューション
 
