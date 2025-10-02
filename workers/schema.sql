@@ -35,12 +35,13 @@ CREATE TABLE IF NOT EXISTS user_history (
     UNIQUE(banner_id, user_identifier)
 );
 
--- usage_tracker テーブル: 月間表示回数トラッキング用
+-- usage_tracker テーブル: 月間表示回数トラッキング用（定額プラン制対応）
 CREATE TABLE IF NOT EXISTS usage_tracker (
     shop_id TEXT NOT NULL,
     current_month TEXT NOT NULL, -- YYYY-MM形式
     display_count INTEGER NOT NULL DEFAULT 0,
-    last_reported_count INTEGER NOT NULL DEFAULT 0,
+    plan_limit INTEGER NOT NULL DEFAULT 1000, -- 現在のプランの月間制限回数
+    is_over_limit INTEGER NOT NULL DEFAULT 0, -- 制限超過フラグ (0: 正常, 1: 超過)
     created_at TEXT NOT NULL DEFAULT (datetime('now')),
     updated_at TEXT NOT NULL DEFAULT (datetime('now')),
     PRIMARY KEY (shop_id, current_month)

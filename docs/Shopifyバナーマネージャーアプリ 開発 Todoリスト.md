@@ -36,11 +36,17 @@
     
 - [ ] **Workers: ストアフロントスクリプト内で、ページパス判定ロジックを実装（ワイルドカード`*`対応）**
     
-- [ ] Workers: 課金トラッキングAPI (`POST /api/track-usage/{shop_id}`) を実装
+- [ ] Workers: プラン管理API (`POST /api/track-usage/{shop_id}`) を実装（プラン制限チェック含む）
     
-- [ ] Workers: Cron Triggersを利用した課金レポートロジックを実装（Usage Chargeレポート）
+- [ ] Workers: プラン変更API (`POST /api/change-plan/{shop_id}`) を実装（Recurring Application Charge管理）
     
-- [ ] React: 課金状況確認API (`GET /api/usage-status/{shop_id}`) を呼び出し、超過時に**アップグレード誘導アラート**を表示
+- [ ] Workers: Cron Triggersを利用した月次リセットロジックを実装（display_countとis_over_limitフラグのリセット）
+    
+- [ ] React: プラン管理画面を実装（現在のプラン情報、利用状況、制限までの残り回数表示）
+    
+- [ ] React: プラン変更機能を実装（アップグレード・ダウングレードUI）
+    
+- [ ] React: プラン状況確認API (`GET /api/usage-status/{shop_id}`) を呼び出し、制限超過時に**プランアップグレード誘導アラート**を表示
     
 
 ## フェーズ 4: 連携とテスト
@@ -49,17 +55,17 @@
     
 - [ ] Workers: アプリ削除Webhook処理を実装
     
-- [ ] テスト: 無料枠超過時の表示停止・アラート表示テスト
+- [ ] テスト: プラン制限超過時の表示停止・アラート表示テスト
     
 - [ ] **テスト: 異なるURLパスにおけるバナーの表示/非表示判定テスト**
     
-- [ ] テスト: 従量課金レポートの正確性テスト
+- [ ] テスト: プラン変更とRecurring Application Chargeの正確性テスト
     
 - [ ] デプロイ: Cloudflare Pages/Workersへのデプロイパイプライン構築
     
 
 ## フェーズ 5: リリース準備
 
-- [ ] Shopifyパートナー管理画面で料金プラン（Usage Charge含む）を設定
+- [ ] Shopifyパートナー管理画面で定額プラン（フリープラン、ベーシックプラン、プロプラン、エンタープライズプラン）を設定
     
 - [ ] アプリ公開申請
