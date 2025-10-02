@@ -1,0 +1,53 @@
+# Shopify バナーマネージャーアプリ設定ファイル
+# Shopify CLI 3.0+ 対応
+
+name = "shopify-info-banner-app"
+client_id = "your_client_id_here"  # Partner Dashboardで取得
+application_url = "https://your-app-domain.com"
+embedded = true
+handle = "info-banner-manager"
+
+[access_scopes]
+scopes = "read_products,write_products,read_orders,write_orders,read_themes,write_themes"
+
+[webhooks]
+api_version = "2024-10"
+
+# 必須Webhook: アプリアンインストール時
+[[webhooks.subscriptions]]
+topics = ["app/uninstalled"]
+uri = "/webhooks/app/uninstalled"
+
+# 必須Webhook: スコープ更新時
+[[webhooks.subscriptions]]
+topics = ["app/scopes_update"]
+uri = "/webhooks/app/scopes_update"
+
+# 必須Webhook: プライバシー関連（公開アプリの場合）
+[[webhooks.subscriptions]]
+uri = "/webhooks/customers/data_request"
+compliance_topics = ["customers/data_request"]
+
+[[webhooks.subscriptions]]
+uri = "/webhooks/customers/redact"
+compliance_topics = ["customers/redact"]
+
+[[webhooks.subscriptions]]
+uri = "/webhooks/shop/redact"
+compliance_topics = ["shop/redact"]
+
+# アプリ固有のWebhook
+[[webhooks.subscriptions]]
+topics = ["orders/create"]
+uri = "/webhooks/orders/create"
+
+[[webhooks.subscriptions]]
+topics = ["products/update"]
+uri = "/webhooks/products/update"
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "your-dev-store.myshopify.com"
+
+[pos]
+embedded = false

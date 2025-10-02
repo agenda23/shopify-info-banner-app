@@ -47,81 +47,86 @@ Shopifyストアのページ最上部に、期間や表示回数を細かく設�
 
 ## 🚀 セットアップ
 
-### 1. リポジトリのクローン
+### 重要: Shopify CLI 3.0+対応
+
+このプロジェクトはShopify CLI 3.0+の標準的なアプリ構造に準拠しています。詳細なセットアップ手順は[開発環境セットアップガイド](docs/開発環境セットアップガイド.md)を参照してください。
+
+### 1. 前提条件
+
+- **Node.js**: v18以上
+- **npm**: v8以上
+- **Shopify CLI**: v3.0以上（必須）
+- **Cloudflare CLI (wrangler)**: v3以上
+
+### 2. クイックスタート
 
 ```bash
+# リポジトリのクローン
 git clone <repository-url>
 cd shopify-info-banner-app
-```
 
-### 2. 依存関係のインストール
-
-```bash
+# 依存関係のインストール
 npm install
+
+# 環境変数の設定
+cp env.example .env
+# .envファイルを編集して必要な値を設定
+
+# Shopify CLIでの開発開始
+shopify app dev
 ```
 
-### 3. 環境変数の設定
-
-`.env`ファイルを作成し、以下の環境変数を設定してください：
-
-```env
-# Shopify設定
-SHOPIFY_API_KEY=your_api_key
-SHOPIFY_API_SECRET=your_api_secret
-SHOPIFY_SCOPES=read_products,write_products,read_orders,write_orders
-
-# Cloudflare設定
-CLOUDFLARE_ACCOUNT_ID=your_account_id
-CLOUDFLARE_API_TOKEN=your_api_token
-
-# アプリ設定
-APP_URL=https://your-app-domain.com
-```
-
-### 4. Cloudflare D1データベースのセットアップ
+### 3. 主要なコマンド
 
 ```bash
-# D1データベースの作成
-wrangler d1 create shopify-banner-db
-
-# スキーマの適用
-wrangler d1 execute shopify-banner-db --file=./schema.sql
-```
-
-### 5. 開発サーバーの起動
-
-```bash
-# フロントエンド開発サーバー
+# 開発サーバーの起動
 npm run dev
+# または
+shopify app dev
 
-# Workers開発サーバー（別ターミナル）
-wrangler dev
+# アプリのビルド
+npm run build
+# または
+shopify app build
+
+# アプリのデプロイ
+npm run deploy
+# または
+shopify app deploy
 ```
 
 ## 📁 プロジェクト構造
 
 ```
 shopify-info-banner-app/
+├── app/                           # アプリケーションコード（Shopify CLI標準）
+│   ├── routes/                    # ルート定義
+│   │   ├── api.webhooks.app.uninstalled.ts
+│   │   ├── api.webhooks.app.scopes_update.ts
+│   │   └── api.webhooks.customers.data_request.ts
+│   ├── components/                # Reactコンポーネント
+│   ├── lib/                       # ライブラリ・ユーティリティ
+│   │   ├── shopify.server.ts      # Shopify App設定
+│   │   ├── app-bridge.ts          # App Bridge設定
+│   │   └── database.server.ts     # データベース接続
+│   ├── hooks/                     # カスタムフック
+│   ├── root.tsx                   # ルートコンポーネント
+│   └── entry.server.tsx           # サーバーエントリーポイント
+├── extensions/                    # アプリ拡張機能
 ├── docs/                          # ドキュメント
 │   ├── Shopifyバナーマネージャーアプリ 要件定義書.md
 │   ├── Shopifyバナーマネージャーアプリ 開発仕様書.md
-│   ├── Shopifyバナーマネージャーアプリ 開発手順書.md
-│   ├── Shopifyバナーマネージャーアプリ 開発 Todoリスト.md
-│   ├── アカウント作成手順書.md
-│   ├── セキュリティ要件.md
-│   ├── 運用・監視要件.md
+│   ├── Shopifyアプリ開発スペック移行ガイド.md
 │   └── 開発環境セットアップガイド.md
 ├── workers/                       # Cloudflare Workers
 │   ├── schema.sql                 # D1データベーススキーマ
 │   └── wrangler.toml              # Wrangler設定
-├── .env.example                   # 環境変数テンプレート
-├── .eslintrc.cjs                  # ESLint設定
-├── .gitignore                     # Git除外設定
-├── .prettierrc                    # Prettier設定
+├── shopify.app.toml               # Shopify App設定（Shopify CLI）
+├── shopify.web.toml               # Web App設定（Shopify CLI）
+├── env.example                    # 環境変数テンプレート
 ├── package.json                   # プロジェクト設定
 ├── README.md                      # このファイル
 ├── tsconfig.json                  # TypeScript設定
-├── tsconfig.node.json             # TypeScript Node設定
 └── vite.config.ts                 # Vite設定
 ```
 

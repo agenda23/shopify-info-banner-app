@@ -1,0 +1,18 @@
+# Webアプリケーション設定ファイル
+# フロントエンドとバックエンドの設定
+
+roles = ["frontend", "backend"]
+
+# 認証コールバックパス
+auth_callback_path = ["/auth/callback", "/auth/shopify/callback"]
+
+# Webhookエンドポイント
+webhooks_path = "/webhooks"
+
+# 開発・ビルドコマンド
+[commands]
+dev = "npm run dev"
+build = "npm run build"
+
+# ポート設定
+port = 3000

@@ -4,20 +4,24 @@
   "description": "Shopifyストアのページ最上部に、期間や表示回数を細かく設定可能なインフォメーションバナーを容易に表示・管理するアプリケーション",
   "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "shopify app dev",
+    "build": "shopify app build",
+    "deploy": "shopify app deploy",
     "preview": "vite preview",
     "test": "vitest",
     "test:e2e": "playwright test",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint:fix": "eslint src --ext ts,tsx --fix",
+    "lint": "eslint app --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint app --ext ts,tsx --fix",
     "type-check": "tsc --noEmit",
-    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "format": "prettier --write \"app/**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "format:check": "prettier --check \"app/**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "workers:dev": "wrangler dev",
     "workers:deploy": "wrangler deploy",
     "workers:db:create": "wrangler d1 create shopify-banner-db",
-    "workers:db:migrate": "wrangler d1 execute shopify-banner-db --file=./workers/schema.sql"
+    "workers:db:migrate": "wrangler d1 execute shopify-banner-db --file=./workers/schema.sql",
+    "shopify:dev": "shopify app dev",
+    "shopify:build": "shopify app build",
+    "shopify:deploy": "shopify app deploy"
   },
   "keywords": [
     "shopify",
@@ -36,10 +40,14 @@
     "@shopify/app-bridge-react": "^4.0.0",
     "@shopify/polaris": "^12.0.0",
     "@shopify/polaris-icons": "^7.0.0",
+    "@shopify/shopify-app-express": "^2.0.0",
+    "@shopify/shopify-app-session-storage-sqlite": "^2.0.0",
+    "@shopify/shopify-api": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.8.0",
-    "axios": "^1.6.0"
+    "react-router": "^6.8.0",
+    "axios": "^1.6.0",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
