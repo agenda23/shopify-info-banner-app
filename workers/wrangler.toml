@@ -1,0 +1,52 @@
+name = "shopify-banner-manager"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# D1データベースバインディング
+[[d1_databases]]
+binding = "DB"
+database_name = "shopify-banner-db"
+database_id = "your-database-id-here"
+
+# Cron Triggers設定（課金レポート用）
+[[triggers]]
+crons = ["0 0 1 * *"] # 毎月1日の午前0時（UTC）
+
+# 環境変数
+[vars]
+ENVIRONMENT = "production"
+
+# セキュリティ設定
+[security]
+# CORS設定
+cors = { allowed_origins = ["https://*.myshopify.com", "https://admin.shopify.com"] }
+
+# レート制限設定
+[rate_limits]
+# API呼び出し制限（1分間に100回）
+api_calls = { requests = 100, window = 60 }
+
+# リソース制限
+[limits]
+cpu_ms = 50000  # 50秒
+memory_mb = 128  # 128MB
+
+# 開発環境設定
+[env.development]
+name = "shopify-banner-manager-dev"
+vars = { ENVIRONMENT = "development" }
+
+[[env.development.d1_databases]]
+binding = "DB"
+database_name = "shopify-banner-db-dev"
+database_id = "your-dev-database-id-here"
+
+# ステージング環境設定
+[env.staging]
+name = "shopify-banner-manager-staging"
+vars = { ENVIRONMENT = "staging" }
+
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "shopify-banner-db-staging"
+database_id = "your-staging-database-id-here"

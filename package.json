@@ -1,0 +1,76 @@
+{
+  "name": "shopify-info-banner-app",
+  "version": "1.0.0",
+  "description": "Shopifyストアのページ最上部に、期間や表示回数を細かく設定可能なインフォメーションバナーを容易に表示・管理するアプリケーション",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:e2e": "playwright test",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint src --ext ts,tsx --fix",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "workers:dev": "wrangler dev",
+    "workers:deploy": "wrangler deploy",
+    "workers:db:create": "wrangler d1 create shopify-banner-db",
+    "workers:db:migrate": "wrangler d1 execute shopify-banner-db --file=./workers/schema.sql"
+  },
+  "keywords": [
+    "shopify",
+    "banner",
+    "information",
+    "notification",
+    "cloudflare",
+    "workers",
+    "react",
+    "polaris"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@shopify/app-bridge": "^4.0.0",
+    "@shopify/app-bridge-react": "^4.0.0",
+    "@shopify/polaris": "^12.0.0",
+    "@shopify/polaris-icons": "^7.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.0",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "vitest": "^0.34.0",
+    "@playwright/test": "^1.40.0",
+    "wrangler": "^3.0.0",
+    "@types/node": "^20.0.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/shopify-info-banner-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/shopify-info-banner-app/issues"
+  },
+  "homepage": "https://github.com/your-username/shopify-info-banner-app#readme"
+}
+
